@@ -15,15 +15,23 @@ body {
   align-items: center;
   background-color: #3f0e67;
   color: white;
+  padding-top: 25px;
+  padding-bottom: 25px;
+  padding-right: 25px;
+  padding-left: 20px;
+  
+  
 }
 
 .brand-title {
   font-size: 1.5rem;
   margin: .5rem;
+  font-family: 'Lora', serif;
 }
 
 .navbar-links {
   height: 100%;
+  font-family: 'Source Sans Pro', sans-serif;
 }
 
 .navbar-links ul {
@@ -178,3 +186,99 @@ body {
 .carousel-button.next {
   right: 1rem;
 }
+
+h1{
+
+  text-align: center;
+  color: #3f0e67;
+  font-family: 'Lora', serif;
+  font-size: 50px;
+  position: relative;
+  
+}
+p{
+
+  text-align: center;
+  color: #3f0e67;
+  font-family: 'Source Sans Pro', sans-serif;
+  position: relative;
+  line-height: 1.6;
+  
+}
+
+.heading{
+
+  padding: 30px;
+  margin: 0px;
+  background-color: #F0E3FF;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  padding: 0;
+  background: #eee;
+  user-select: none;
+  background-image: linear-gradient(to bottom left, #3f0e67,#3f0e67);
+}
+
+[type=radio] {
+  display: none;
+}
+
+#slider {
+  height: 35vw;
+  position: relative;
+  perspective: 1000px;
+  transform-style: preserve-3d;
+}
+
+#slider label {
+  margin: auto;
+  width: 60%;
+  height: 100%;
+  border-radius: 4px;
+  position: absolute;
+  left: 0; right: 0;
+  cursor: pointer;
+  transition: transform 0.4s ease;
+}
+
+#s1:checked ~ #slide4, #s2:checked ~ #slide5,
+#s3:checked ~ #slide1, #s4:checked ~ #slide2,
+#s5:checked ~ #slide3 {
+  box-shadow: 0 1px 4px 0 rgba(0,0,0,.37);
+  transform: translate3d(-30%,0,-200px);
+}
+
+#s1:checked ~ #slide5, #s2:checked ~ #slide1,
+#s3:checked ~ #slide2, #s4:checked ~ #slide3,
+#s5:checked ~ #slide4 {
+  box-shadow: 0 6px 10px 0 rgba(0,0,0,.3), 0 2px 2px 0 rgba(0,0,0,.2);
+  transform: translate3d(-15%,0,-100px);
+}
+
+#s1:checked ~ #slide1, #s2:checked ~ #slide2,
+#s3:checked ~ #slide3, #s4:checked ~ #slide4,
+#s5:checked ~ #slide5 {
+  box-shadow: 0 13px 25px 0 rgba(0,0,0,.3), 0 11px 7px 0 rgba(0,0,0,.19);
+  transform: translate3d(0,0,0);
+}
+
+#s1:checked ~ #slide2, #s2:checked ~ #slide3,
+#s3:checked ~ #slide4, #s4:checked ~ #slide5,
+#s5:checked ~ #slide1 {
+  box-shadow: 0 6px 10px 0 rgba(0,0,0,.3), 0 2px 2px 0 rgba(0,0,0,.2);
+  transform: translate3d(15%,0,-100px);
+}
+
+#s1:checked ~ #slide3, #s2:checked ~ #slide4,
+#s3:checked ~ #slide5, #s4:checked ~ #slide1,
+#s5:checked ~ #slide2 {
+  box-shadow: 0 1px 4px 0 rgba(0,0,0,.37);
+  transform: translate3d(30%,0,-200px);
+}
+
