@@ -5,7 +5,7 @@
 body {
   margin: 0;
   padding: 0;
-  background-image: linear-gradient(to bottom right, #3f0e67, #03989E);
+  background-image: linear-gradient(to bottom right, #3f0e67, #008080);
 }
 
 .navbar {
@@ -52,7 +52,7 @@ body {
 }
 
 .navbar-links li:hover {
-  background-color: turquoise;
+  background-color: #008080;
 }
 
 .toggle-button {
@@ -222,7 +222,7 @@ body {
   padding: 0;
   background: #eee;
   user-select: none;
-  background-image: linear-gradient(to top right, #3f0e67,#03989E);
+  background-image: linear-gradient(to top right, #3f0e67,#008080);
 }
 
 [type=radio] {
@@ -295,7 +295,7 @@ ul{
   list-style: none;
 }
 .footer{
-  background-image: linear-gradient(to top right,#03989E, #3f0e67);
+  background-image: linear-gradient(to top right,#008080, #3f0e67);
     padding: 70px 0;
 }
 .footer-col{
