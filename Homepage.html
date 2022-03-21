@@ -11,56 +11,11 @@
           <!-- Bootstrap CSS -->
           <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
         </head>
+
 <body>
 
-  
-  <!-- Modal -->
-<div class="modal fade" id="myModal" role="dialog">
-  <div class="modal-dialog modal-dialog-centered"  >
+ 
 
-    <!-- Modal content-->
-    <div class="modal-content">
-      <div class="modal-header">
-  <h5 class="modal-title" id="staticBackdropLabel">WELCOME</h5>
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title"></h4>
-      </div>
-      <div class="modal-body">
-       
-    <p>Would you like to be updated about new promos? <br>
-    Enter your email for updates</p>
-    <form>
-        <div class="form-group">
-          <label for="Email" class="col-form-label" style="color:red"; >Email:</label>
-          <input type="text" class="form-control" id="email" placeholder="juandelacruz@gmail.com">
-        </div>
-      </div>
-      <div class="modal-footer">
-        <button class="btn btn-danger" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#secondModal">Send Email</button>
-      </div>
-    </div>
-  </div>
-
- <!-- Second Modal -->
- <div class="modal fade" id="secondModal" role="dialog" data-backdrop="static">
-  <div class="modal-dialog modal-dialog-centered">
-
-    <!-- Modal content-->
-    <div class="modal-content">
-      <div class="modal-header alert alert-success">
-  <h5 class="modal-title" id="staticBackdropLabel">Thank you!</h5>
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title"></h4>
-      </div>
-      <div class="modal-body">
-       
-    <p>Thank you, will email you! </p>
-      </div>
-    </div>
-  </div>
-</div>
-</div>
 
           <nav class="navbar">
             <div class="brand-title">The Purple Owl</div>
@@ -97,6 +52,8 @@
               </ul>
             </div>
           </section>
+
+
     <div class ="heading">
           <h1>
             Making Wonderful Memories
@@ -192,6 +149,55 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Lora:ital@1&display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@300&display=swap" rel="stylesheet">
+
+ <!-- Modal -->
+ <div class="modal fade" id="myModal" role="dialog">
+  <div class="modal-dialog modal-dialog-centered"  >
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+  <h5 class="modal-title" id="staticBackdropLabel">WELCOME</h5>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title"></h4>
+      </div>
+
+      <div class="modal-body">
+       
+    <p>Would you like to be updated about new promos? <br>
+    Enter your email for updates</p>
+    <form>
+        <div class="form-group">
+          <label for="Email" class="col-form-label" style="color:red"; >Email:</label>
+          <input type="text" class="form-control" id="email" placeholder="juandelacruz@gmail.com">
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-danger" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#secondModal">Send Email</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Second Modal -->
+<div class="modal fade" id="secondModal" role="dialog" data-backdrop="static">
+  <div class="modal-dialog modal-dialog-centered">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header alert alert-success">
+  <h5 class="modal-title" id="staticBackdropLabel">Thank you!</h5>
+        <button type="button" class="close" data-dismiss="modal" id="close">&times;</button>
+        <h4 class="modal-title"></h4>
+      </div>
+      <div class="modal-body">
+       
+    <p>Thank you, will email you! </p>
+      </div>
+    </div>
+  </div>
+</div>
 
 </body>
 

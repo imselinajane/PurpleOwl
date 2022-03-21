@@ -31,6 +31,6 @@ buttons.forEach(button => {
     $('#myInput').trigger('focus')
   })
   
-
+ 
 
 
