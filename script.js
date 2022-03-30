@@ -23,3 +23,14 @@ buttons.forEach(button => {
     delete activeSlide.dataset.active
   })
 })
+ $(window).on('load',function(){
+	$('#myModal').modal('show');
+	}); 
+  
+  $('#secondModal').on('shown.bs.modal', function () {
+    $('#myInput').trigger('focus')
+  })
+  
+ 
+
+
