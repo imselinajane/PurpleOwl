@@ -121,6 +121,19 @@ input[type=password] {
   background-color: white
 }
 
+.sendEmailBT {
+  background-color: #ddd;
+  border: none;
+  color: black;
+  padding: 16px 32px;
+  text-align: center;
+  font-family: 'Kaushan Script', cursive;
+  font-size: 20px;
+  margin: 4px 2px;
+  transition: 0.3s;
+  background-color: white
+}
+
 .loginBT {
   background-color: #ddd;
   border: none;
@@ -171,6 +184,11 @@ input:hover[type=submit] {
 }
 
 .forgetPassBT:hover {
+  background-color: #3f0e67;
+  color: white;
+}
+
+.sendEmailBT:hover {
   background-color: #3f0e67;
   color: white;
 }
