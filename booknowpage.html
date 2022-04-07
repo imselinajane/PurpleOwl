@@ -217,20 +217,27 @@
                    Meaningful Message and Quotes to Add
                 </div>
                 </div>
+            
+             <div class="centerDiv2">
+                 <input type="checkbox" id="modalButton" name="terms" value="terms">&nbsp;&nbsp;&nbsp;
+                         <label for="terms"> I agree to the terms and conditions</label>
+      
+      
+                         </div>
                
- <button class="nextButton" id="modalButton">Book Now!</button>
+ <button class="nextButton">Book Now!</button>
         </div>
        </div>
 </center>
     
     
-    <div id="myModal" class="modal">
+    <div id="myModal" class="modal" >
 
   <!-- Modal content -->
   <div class="modal-content">
     <span class="close">&times;</span>
-      Terms and Conditions
-    <textarea class="termsContainer">Welcome to Website Name!
+      <div class="termsHeader">Terms and Conditions</div>
+    <textarea class="termsContainer" readonly>Welcome to Website Name!
 
 These terms and conditions outline the rules and regulations for the use of Company Name's Website, located at Website.com.
 
@@ -246,7 +253,11 @@ Most interactive websites use cookies to let us retrieve the user's details for 
 License
 Unless otherwise stated, Company Name and/or its licensors own the intellectual property rights for all material on Website Name. All intellectual property rights are reserved. You may access this from Website Name for your own personal use subjected to restrictions set in these terms and conditions.</textarea>
       
-      <button class="nextButton" style=" margin-left: 430px">Book Now!</button>
+      <div class="rowDiv">
+           <button class="decline" id="decline">Decline</button>
+      <button class="accept" id="accept">Accept</button>
+     
+          </div>
   </div>
 
 </div>
@@ -335,8 +346,11 @@ function changeForm(formNo) {
 var modal = document.getElementById("myModal");
 var btn = document.getElementById("modalButton");
 var span = document.getElementsByClassName("close")[0];
+var accept = document.getElementById("accept");
+var decline = document.getElementById("decline"); 
 btn.onclick = function() {
   modal.style.display = "flex";
+  document.getElementById("modalButton").checked = false;
 }
 
 span.onclick = function() {
@@ -348,6 +362,17 @@ window.onclick = function(event) {
     modal.style.display = "none";
   }
 }
+
+accept.onclick = function() {
+    document.getElementById("modalButton").checked = true;
+     modal.style.display = "none";
+}
+
+decline.onclick = function() {
+    document.getElementById("modalButton").checked = false;
+     modal.style.display = "none";
+}
+
 </script>
 </html>
 
