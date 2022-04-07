@@ -58,7 +58,6 @@ public class checkOut extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         ServletContext sc = getServletContext();
-        HttpSession session = request.getSession();
         try {
             String name = request.getParameter("name");
             String date = request.getParameter("datetime");

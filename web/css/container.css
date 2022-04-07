@@ -16,6 +16,10 @@
   width: 10%;
 }
 
+.pre{ /*change niyo to for formatting the text*/
+    
+}
+
 /* HEADER */
 header {
   display: flex;
@@ -28,7 +32,6 @@ body {
   background-color: #3f0e67;
   margin-top: 3%;
 }
-
 
 /* DESIGN */
 li, a, button {

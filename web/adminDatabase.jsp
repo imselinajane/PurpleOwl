@@ -10,6 +10,28 @@
         <link rel="stylesheet" type="text/css" href="css/database.css">
     </head>
     <body>
+        <nav class="navbar">
+            <div class="brand-title">The Purple Owl</div>
+            <a href="Homepage.jsp" class="toggle-button">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </a>
+            <div class="navbar-links">
+                <ul>
+                    <li><a href="Homepage.jsp" >Home</a></li>
+                    <li><a href="foodPackages.jsp">Packages</a></li>
+                    <li><a href="bookNow.jsp">Book Now!</a></li>
+                    <li><a href="AboutUs.jsp">About Us</a></li>
+                        <% if (session.getAttribute("sessionTest") == null || session == null) { %>
+                    <li><a href="adminLogin.jsp">Log-in</a></li>
+                        <% } else { %>
+                    <li><a href="adminDatabase.jsp">Admin Database</a></li>
+                    <li><a href="logout.do">Log out</a></li>
+                        <% }%>
+                </ul>
+            </div>
+        </nav>
         <%
             if (session.getAttribute("sessionTest") == null || session == null) {
                 response.sendRedirect("Homepage.jsp");
@@ -19,11 +41,6 @@
             Admin scMsg = (Admin) getServletContext().getAttribute("loginDetails");
             String userName = scMsg.getUEmail();
         %> 
-        <div class="navbar-links">
-            <ul>
-                <li><a href="logout.do" >Logout</a></li>
-            </ul>
-        </div>
         <div class="showUsername">
             <h2>
                 <% out.print("Welcome, " + userName); %>

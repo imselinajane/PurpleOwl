@@ -2,8 +2,8 @@
 <!doctype html>
 <html lang="en">
     <head>
-        <link rel="stylesheet" type="text/css" href="css/background_styles.css">
-        <link rel="stylesheet" type="text/css" href="css/style.css"> 
+        <link rel="stylesheet" href="css/background_styles.css">
+        <link rel="stylesheet" href="css/style.css"> 
         <title>Purple Owl</title>
         <!-- Required meta tags -->
         <meta charset="utf-8">
@@ -11,6 +11,7 @@
 
         <!-- Bootstrap CSS -->
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     </head>
 
     <body>
@@ -27,10 +28,15 @@
             <div class="navbar-links">
                 <ul>
                     <li><a href="Homepage.jsp" >Home</a></li>
-                    <li><a href="foodPackages.html">Packages</a></li>
+                    <li><a href="foodPackages.jsp">Packages</a></li>
                     <li><a href="bookNow.jsp">Book Now!</a></li>
-                    <li><a href="AboutUs.html">About Us</a></li>
+                    <li><a href="AboutUs.jsp">About Us</a></li>
+                        <% if (session.getAttribute("sessionTest") == null || session == null) { %>
                     <li><a href="adminLogin.jsp">Log-in</a></li>
+                        <% } else { %>
+                    <li><a href="adminDatabase.jsp">Admin Database</a></li>
+                    <li><a href="logout.do">Log out</a></li>
+                        <% }%>
                 </ul>
             </div>
         </nav>
@@ -112,10 +118,15 @@
                         <h4>The Purple Owl</h4>
                         <ul>
                             <li><a href="Homepage.jsp" >Home</a></li>
-                            <li><a href="foodPackages.html">Packages</a></li>
+                            <li><a href="foodPackages.jsp">Packages</a></li>
                             <li><a href="bookNow.jsp">Book Now!</a></li>
-                            <li><a href="AboutUs.html">About Us</a></li>
+                            <li><a href="AboutUs.jsp">About Us</a></li>
+                                <% if (session.getAttribute("sessionTest") == null || session == null) { %>
                             <li><a href="adminLogin.jsp">Log-in</a></li>
+                                <% } else { %>
+                            <li><a href="adminDatabase.jsp">Admin Database</a></li>
+                            <li><a href="logout.do">Log out</a></li>
+                                <% }%>
                         </ul>
                     </div>
                     <div class="footer-col">
@@ -129,10 +140,9 @@
                     <div class="footer-col">
                         <h4>follow us</h4>
                         <div class="social-links">
-                            <a href="#"><i class="fab fa-facebook-f"></i></a>
-                            <a href="#"><i class="fab fa-twitter"></i></a>
-                            <a href="#"><i class="fab fa-instagram"></i></a>
-                            <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                            <a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a>
+                            <a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a>
+                            <a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a>
                         </div>
                     </div>
                 </div>
@@ -151,65 +161,55 @@
         <link href="https://fonts.googleapis.com/css2?family=Lora:ital@1&display=swap" rel="stylesheet">
         <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@300&display=swap" rel="stylesheet">
 
+        <!-- Modal -->
+        <div class="modal fade" id="myModal" role="dialog">
+            <div class="modal-dialog modal-dialog-centered"  >
 
-        <form action="modal.do" method="POST" id="modalForm">
-            <!-- Modal -->
-            <div class="modal fade" id="myModal" role="dialog">
-                <div class="modal-dialog modal-dialog-centered"  >
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="staticBackdropLabel">WELCOME</h5>
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title"></h4>
+                    </div>
 
-                    <!-- Modal content-->
+                    <div class="modal-body">
 
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="staticBackdropLabel">WELCOME</h5>
-                            <button type="button" class="close" data-dismiss="modal">&times;</button>
-                            <h4 class="modal-title"></h4>
-                        </div>
-
-                        <div class="modal-body">
-
-                            <p>Would you like to be updated about new promos? <br>
-                                Enter your email for updates</p>
-
+                        <p>Would you like to be updated about new promos? <br>
+                            Enter your email for updates</p>
+                        <form>
                             <div class="form-group">
-                                <label for="Email" class="col-form-label" style="color: red" >Email:</label>
-                                <input type="email" class="form-control" name="emailInput" id="email" placeholder="juandelacruz@gmail.com">
+                                <label for="Email" class="col-form-label" style="color:red;" >Email:</label>
+                                <input type="text" class="form-control" id="email" placeholder="juandelacruz@gmail.com">
                             </div>
-                        </div>
-                        <div class="modal-footer">
-                            <button class="btn btn-danger" data-dismiss="modal">Close</button>
-                            <button type="button"class="btn btn-primary" data-toggle="modal" data-target="#secondModal">Send Email</button>
-                        </div>
-
                     </div>
-
-                </div>
-            </div>
-
-            <!-- Second Modal -->
-            <div class="modal fade" id="secondModal" role="dialog" data-backdrop="static">
-                <div class="modal-dialog modal-dialog-centered">
-
-                    <!-- Modal content-->
-                    <div class="modal-content">
-                        <div class="modal-header alert alert-success">
-                            <h5 class="modal-title" id="staticBackdropLabel">Thank you!</h5>
-                            <button class="close" id="close">&times;</button>
-                            <h4 class="modal-title"></h4>
-                        </div>
-                        <div class="modal-body">
-                            <p>Thank you, we will email you for updates!</p>
-                        </div>
-                        <div class="modal-footer">
-                            <button class="btn btn-danger">Close</button>
-                        </div>
+                    <div class="modal-footer">
+                        <button class="btn btn-danger" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#secondModal">Send Email</button>
                     </div>
                 </div>
             </div>
-        </form>
+        </div>
 
+        <!-- Second Modal -->
+        <div class="modal fade" id="secondModal" role="dialog" data-backdrop="static">
+            <div class="modal-dialog modal-dialog-centered">
 
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header alert alert-success">
+                        <h5 class="modal-title" id="staticBackdropLabel">Thank you!</h5>
+                        <button type="button" class="close" data-dismiss="modal" id="close">&times;</button>
+                        <h4 class="modal-title"></h4>
+                    </div>
+                    <div class="modal-body">
 
+                        <p>Thank you, will email you! </p>
+                    </div>
+                </div>
+            </div>
+        </div>
 
     </body>
+
 </html>

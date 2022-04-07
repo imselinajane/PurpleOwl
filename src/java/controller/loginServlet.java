@@ -21,9 +21,8 @@ import javax.servlet.http.HttpSession;
 import listener.userContextListener;
 import model.Admin;
 
-
 public class loginServlet extends HttpServlet {
-    
+
     Connection con;
     int timeOutSeconds = 0;
 
@@ -54,61 +53,59 @@ public class loginServlet extends HttpServlet {
             cnfe.printStackTrace();
         }
     }
-    
+
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            ServletContext sc = getServletContext();
-            try {
-                if (con != null) {
-                    HttpSession session = request.getSession();
-                    String userEmail = request.getParameter("adminUserEmail").trim();
-                    String pass = request.getParameter("adminPass").trim();
-                    if (userEmail.isEmpty() && pass.isEmpty()) {
-                        sc.setAttribute("errorMessage", "Both email and password is empty!");
-                        throw new NullValueException();
-                    } else if (userEmail.isEmpty()) {
-                        sc.setAttribute("errorMessage", "Entered username or email is empty!");
-                        throw new NullValueException();
-                    } else if (pass.isEmpty()) {
-                        sc.setAttribute("errorMessage", "Entered password is empty!");
-                        throw new NullValueException(); 
-                    }
-                    String query = "SELECT * FROM ADMINACCOUNTS";
-                    PreparedStatement pStmt = con.prepareStatement(query);
-                    ResultSet rs = pStmt.executeQuery();
-                    
-                    while (rs.next()) {
-                        if ((userEmail.equals(rs.getString("EMAIL")) || userEmail.equals(rs.getString("USERNAME")))
-                                && pass.equals(decrypt(rs.getString("PASSWORD")))) { //add encryption?
-                            session.setAttribute("sessionTest", true);
-                            Admin human = new Admin(userEmail, pass);
-                            sc.setAttribute("loginDetails", human);
-
-                            userContextListener ucl = new userContextListener();
-                            ucl.contextInitialized(new ServletContextEvent(sc));
-                            response.sendRedirect("adminDatabase.jsp");
-                            return;
-                        } else if (userEmail.equals(rs.getString("EMAIL")) && !pass.equals(decrypt(rs.getString("PASSWORD")))) {
-                            //error 2 - correct email, wrong pass
-                            sc.setAttribute("errorMessage", "Sorry, you entered the wrong password!");
-                            throw new AuthenticationException(); //change this exception to user-defined exception soon, placeholder
-                        }
-                    }
-                    pStmt.close();
-                    rs.close();
-                } else {
-                    response.sendError(HttpServletResponse.SC_NOT_FOUND);
+        ServletContext sc = getServletContext();
+        try {
+            if (con != null) {
+                HttpSession session = request.getSession();
+                String userEmail = request.getParameter("adminUserEmail").trim();
+                String pass = request.getParameter("adminPass").trim();
+                if (userEmail.isEmpty() && pass.isEmpty()) {
+                    sc.setAttribute("errorMessage", "Both email and password is empty!");
+                    throw new NullValueException();
+                } else if (userEmail.isEmpty()) {
+                    sc.setAttribute("errorMessage", "Entered username or email is empty!");
+                    throw new NullValueException();
+                } else if (pass.isEmpty()) {
+                    sc.setAttribute("errorMessage", "Entered password is empty!");
+                    throw new NullValueException();
                 }
-            } catch (SQLException sqle) {
-                sc.setAttribute("errorMessage", "SQL Exception occurred!");
-                response.sendRedirect("errorPage.jsp");
-            } catch (NullValueException nve) {
-                response.sendRedirect("errorPage.jsp");
-            } catch (AuthenticationException aue) {
-                response.sendRedirect("errorPage.jsp");
+                String query = "SELECT * FROM ADMINACCOUNTS";
+                PreparedStatement pStmt = con.prepareStatement(query);
+                ResultSet rs = pStmt.executeQuery();
+
+                while (rs.next()) {
+                    if ((userEmail.equals(rs.getString("EMAIL")) || userEmail.equals(rs.getString("USERNAME")))
+                            && pass.equals(decrypt(rs.getString("PASSWORD")))) { //add encryption?
+                        session.setAttribute("sessionTest", true);
+                        Admin human = new Admin(userEmail, pass);
+                        sc.setAttribute("loginDetails", human);
+
+                        userContextListener ucl = new userContextListener();
+                        ucl.contextInitialized(new ServletContextEvent(sc));
+                        response.sendRedirect("adminDatabase.jsp");
+                        return;
+                    } else if (userEmail.equals(rs.getString("EMAIL")) && !pass.equals(decrypt(rs.getString("PASSWORD")))) {
+                        //error 2 - correct email, wrong pass
+                        sc.setAttribute("errorMessage", "Sorry, you entered the wrong password!");
+                        throw new AuthenticationException(); //change this exception to user-defined exception soon, placeholder
+                    }
+                }
+                pStmt.close();
+                rs.close();
+            } else {
+                response.sendError(HttpServletResponse.SC_NOT_FOUND);
             }
+        } catch (SQLException sqle) {
+            sc.setAttribute("errorMessage", "SQL Exception occurred!");
+            response.sendRedirect("errorPage.jsp");
+        } catch (NullValueException nve) {
+            response.sendRedirect("errorPage.jsp");
+        } catch (AuthenticationException aue) {
+            response.sendRedirect("errorPage.jsp");
         }
     }
 
