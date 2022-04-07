@@ -224,8 +224,8 @@
 <!---FOOTER--->
 
 <footer class="footer">
-    <div class="foot">
-        <div class="row">
+     <div class="container4">
+      <div class="row1">
             <div class="footer-col">
                 <h4>The Purple Owl</h4>
                 <ul>
