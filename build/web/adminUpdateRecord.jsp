@@ -3,6 +3,7 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Update Record</title>
     </head>
@@ -52,6 +53,7 @@
                     ResultSet rss = prepStmt.executeQuery();
                     rss.last();
                     String updateBT = "";
+                    PreparedStatement prepareStmt = con.prepareStatement("SELECT * FROM ITEMDB");
                     PreparedStatement pStmt = con.prepareStatement("SELECT * FROM ORDERSDB WHERE USERID = ?");
                     for (int i = 1; i <= rss.getRow(); i++) {
                         updateBT = request.getParameter("update" + i);
@@ -80,52 +82,12 @@
                     <label for="number">contact number:</label><br>
                     <input type="text" id="number" placeholder="<%= rs.getString("CONTACTNUMBER")%>" name="number"required><br>
                 </div>
-                <div class="bookDetails">
-                    <label for="package">Package:</label>
-                    <select id="package" name="package"required>
-                        <option value=""disabled selected>Choose your Package</option>
-                        <option value="Simple Romantic"> Simple Romantic </option>
-                        <option value="Movie Date"> Movie Date </option>
-                        <option value="Live Music"> Live Music </option>
-                    </select><br><br>
-
-                    <label for="menu">Menu:</label>
-                    <select id="menu" name="menu"required>
-                        <option value=""disabled selected>Choose your Menu</option>
-                        <option value="Menu A"> Menu A </option>
-                        <option value="Menu B"> Menu B </option>
-                        <option value="Menu C"> Menu C </option>
-                    </select><br><br>
-
-                    <label for="venue">Preferred Venue:</label><br>
-                    <input type="text" placeholder="<%= rs.getString("VENUE")%>" id="venue" name="venue"required><br><br>
-                </div>
 
                 <div class="personalDetails">
-                    <label for="addons">Add-ons:</label> <br><br>
-                    <input type="checkbox" id="candle" name="addOnsChkbox" value="Candles & Petals">
-                    <label for="candle"> Candles & Petals</label>
-                    <input type="checkbox" id="surprise" name="addOnsChkbox" value="Surprise Room">
-                    <label for="vehicle2"> Surprise Room</label>
-                    <input type="checkbox" id="vehicle3" name="addOnsChkbox" value="Additional Person">
-                    <label for="vehicle3"> Additional Person</label><br>
-                    <input type="checkbox" id="vehicle1" name="addOnsChkbox" value="Photo Coverage">
-                    <label for="vehicle1"> Photo Coverage</label>
-                    <input type="checkbox" id="vehicle2" name="addOnsChkbox" value="Video Coverage w/ Edit">
-                    <label for="vehicle2"> Video Coverage w/ Edit</label>
-                    <input type="checkbox" id="vehicle3" name="addOnsChkbox" value="Violinist & Guitar">
-                    <label for="vehicle3"> Violinist & Guitar</label><br>
-                    <input type="checkbox" id="vehicle1" name="addOnsChkbox" value="Fireworks">
-                    <label for="vehicle1"> Fireworks</label>
-                    <input type="checkbox" id="vehicle2" name="addOnsChkbox" value="Fountains">
-                    <label for="vehicle2"> Fountains</label>
-                    <input type="checkbox" id="vehicle3" name="addOnsChkbox" value="Flower Bouquets">
-                    <label for="vehicle3"> Flower Bouquets</label>
-                    <input type="checkbox" id="vehicle3" name="addOnsChkbox" value="Balloons">
-                    <label for="vehicle3"> Balloons</label><br><br>
-
                     <label for="request">Dietary Requests/Restrictions:</label><br>
                     <textarea rows="5" cols="60" name="requestText" placeholder="<%= rs.getString("REQUESTS")%>"></textarea>
+                    <label for="venue">Preferred Venue:</label><br>
+                    <input type="text" placeholder="<%= rs.getString("VENUE")%>" id="venue" name="venue"required><br><br>
 
                     <h2>Personalize Your Set-up</h2>
                     <label for="theme">Choose a Theme/Colour Scheme:</label><br> 
@@ -136,11 +98,63 @@
                     <input type="text" placeholder="<%= rs.getString("QUOTES1")%>" id="message" name="message"><br>
                     <label for="music">Type a meaningful message and quotes to add in the design:</label><br> 
                     <input type="text" placeholder="<%= rs.getString("QUOTES2")%>" id="music" name="message2"><br>
+                </div><br>
+                <div class="price">
+                    <label for="price">Price:</label><br> 
+                    <input type="text" value="" placeholder="<%= rs.getString("PRICE")%>" id="totalPrice" name="price"><br>
                 </div>
             </div>
+            <% } %><br><br>
 
-            <%
-                    }
+            <div class="bookDetails">
+                <label for="package">Package:</label>
+                <select class="options" name="package">
+                    <option value="" data-price="0" disabled selected>Choose your Package</option>
+                    <% ResultSet rsPack = prepareStmt.executeQuery();
+                        while (rsPack.next()) {
+                            if (rsPack.getString("TYPE").equals("Package")) { %>
+                    <option value="<%out.print(rsPack.getString("NAME"));%>" data-price="<%out.print(rsPack.getInt("PRICE"));%>"> 
+                        <%out.print(rsPack.getString("NAME"));%> </option>
+                        <% }
+                            }
+                        %>
+                </select>
+                <br>
+                <br>
+
+                <label for="menu">Menu:</label>
+                <select class="options" name="menu">
+                    <option value="" data-price="0" disabled selected>Choose your Menu</option>
+                    <% ResultSet rsMenu = prepareStmt.executeQuery();
+                        while (rsMenu.next()) {
+                            if (rsMenu.getString("TYPE").equals("Menu")) {
+                    %>
+                    <option value="<%out.print(rsMenu.getString("NAME"));%>" data-price="<%out.print(rsMenu.getInt("PRICE"));%>"> 
+                        <%out.print(rsMenu.getString("NAME"));%> </option>
+                        <% }
+                            }
+                        %>
+                </select>
+                <br>
+                <div class="centerDiv">
+                    <% ResultSet rsAddOn = prepareStmt.executeQuery();
+                        while (rsAddOn.next()) {
+                            if (rsAddOn.getString("TYPE").equals("Add-On")) { %>
+                    <input type="checkbox" id="addOnsChkbox" data-price="<%out.print(rsAddOn.getInt("PRICE"));%>" 
+                           name="addOnsChkbox" value="<%out.print(rsAddOn.getInt("PRICE"));%>">
+                    <label for="addOnsChkbox"><%out.print(rsAddOn.getString("NAME"));%></label> <br><br>
+                    <% }
+                        }
+                    %>
+                </div>
+            </div>
+            <% rss.close();
+                    prepareStmt.close();
+                    pStmt.close();
+                    rsPack.close();
+                    rsMenu.close();
+                    rsAddOn.close();
+                    rs.close();
                 } catch (SQLException sqle) {
                     sqle.printStackTrace();
                 }%>
@@ -149,3 +163,24 @@
         </form>
     </body>
 </html>
+<script>
+    $("select[class='options']").change(function () {
+        updateTotal();
+    });
+    $("input[type='checkbox']").click(function () {
+        updateTotal();
+    });
+    function updateTotal() {
+        var total = 0;
+        $("select[class='options'] option:selected").each(function () {
+            total += parseInt($(this).data('price'));
+            console.log(total);
+            $("input[name='price']").val(total);
+        });
+        $("input[id='addOnsChkbox']:checked").each(function () {
+            total += parseInt($(this).data('price'));
+            console.log(total);
+            $("input[name='price']").val(total);
+        });
+    }
+</script>

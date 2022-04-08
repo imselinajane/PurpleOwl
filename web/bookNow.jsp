@@ -47,32 +47,13 @@
         </nav>
     </header>
     <script>var basePrice = 0;</script>
-    <body>
-        <%
-            try {
-                //Register driver
-                Class.forName(getServletContext().getInitParameter("jdbcClassName"));
-                System.out.println("Loaded driver.");
 
-                //Use String buffer for connection
-                StringBuffer buff = new StringBuffer(getServletContext().getInitParameter("jdbcDriverURL"))
-                        .append("://").append(getServletContext().getInitParameter("dbHostName"))
-                        .append(":").append(getServletContext().getInitParameter("dbPort"))
-                        .append("/").append(getServletContext().getInitParameter("databaseName"));
-                //jdbc:derby://localhost:1527/PurpleOwlAdminDB
 
-                //Establish connection
-                Connection con = DriverManager.getConnection(buff.toString(),
-                        getServletContext().getInitParameter("dbUserName"), getServletContext().getInitParameter("dbPassword"));
-                System.out.println("You are now connected.");
-                String query = "SELECT * FROM ITEMDB";
-                PreparedStatement pStmt = con.prepareStatement(query);
-        %>
-        <!---ABOUT US PART--->
+    <!---ABOUT US PART--->
 
-        <div class="header-container">
-            <h1>Create Your Special Occasion With Us!</h1>
-        </div>
+    <div class="header-container">
+        <h1>Create Your Special Occasion With Us!</h1>
+    </div>
     <center>
         <form action="checkOut.do" method="POST">
             <!---midbox--->
@@ -117,7 +98,26 @@
                 </div>
 
                 <div class="form-content" id="form2">
+                    <%
+                        try {
+                            //Register driver
+                            Class.forName(getServletContext().getInitParameter("jdbcClassName"));
+                            System.out.println("Loaded driver.");
 
+                            //Use String buffer for connection
+                            StringBuffer buff = new StringBuffer(getServletContext().getInitParameter("jdbcDriverURL"))
+                                    .append("://").append(getServletContext().getInitParameter("dbHostName"))
+                                    .append(":").append(getServletContext().getInitParameter("dbPort"))
+                                    .append("/").append(getServletContext().getInitParameter("databaseName"));
+                            //jdbc:derby://localhost:1527/PurpleOwlAdminDB
+
+                            //Establish connection
+                            Connection con = DriverManager.getConnection(buff.toString(),
+                                    getServletContext().getInitParameter("dbUserName"), getServletContext().getInitParameter("dbPassword"));
+                            System.out.println("You are now connected.");
+                            String query = "SELECT * FROM ITEMDB";
+                            PreparedStatement pStmt = con.prepareStatement(query);
+                    %>
                     <!-- select package -->
                     <div class="inputBox">
                         <select class="options" name="package">
@@ -224,10 +224,18 @@
                             Meaningful Message and Quotes to Add
                         </div>
                     </div>
+                    <div class="centerDiv2">
+                        <input type="checkbox" class="terms" id="modalButton" name="terms" value="terms" required>&nbsp;&nbsp;&nbsp;
+                        <label for="terms"> I agree to the terms and conditions</label>
 
+
+                    </div>
                 </div>
             </div>
-            <br><br><h1>Price: Php <span name="price"id="item-price">0.00</span></h1><br><br> <!-- change this css -->
+                <% int i = 0; %>
+            <br><br><h1>Price: Php <span id="item-price">0.00</span></h1><br><br> <!-- change this css -->
+            <input type="hidden" id="totalPrice" name="price" value="0">
+
             <div id="myModal" class="modal" >
 
                 <!-- Modal content -->
@@ -251,13 +259,12 @@ License
 Unless otherwise stated, Company Name and/or its licensors own the intellectual property rights for all material on Website Name. All intellectual property rights are reserved. You may access this from Website Name for your own personal use subjected to restrictions set in these terms and conditions.</textarea>
 
                     <div class="rowDiv">
-                        <button class="decline" id="decline">Decline</button>
+                        <button type="button" class="decline" id="decline">Decline</button>
                         <button class="accept" id="accept">Accept</button>
                     </div>
                 </div>
             </div>
         </form>
-        <input type="submit" class="nextButton" id="modalButton"/>
     </center>
 </body>
 
@@ -302,12 +309,14 @@ Unless otherwise stated, Company Name and/or its licensors own the intellectual 
 </footer>
 </html>
 <script>
-
     $("select[class='options']").change(function () {
         updateTotal();
     });
     $("input[type='checkbox']").click(function () {
         updateTotal();
+    });
+    $("input[class='terms']").click(function () {
+        document.getElementById("totalPrice").value = document.getElementById('item-price').innerHTML;
     });
     function updateTotal() {
         var total = 0;
@@ -315,7 +324,7 @@ Unless otherwise stated, Company Name and/or its licensors own the intellectual 
             total += parseInt($(this).data('price'));
             $("#item-price").text(total);
         });
-        $("input[type='checkbox']:checked").each(function () {
+        $("input[id='addOnsChkbox']:checked").each(function () {
             total += parseInt($(this).data('price'));
             $("#item-price").text(total);
         });
@@ -366,15 +375,12 @@ Unless otherwise stated, Company Name and/or its licensors own the intellectual 
     var btn = document.getElementById("modalButton");
     var span = document.getElementsByClassName("close")[0];
 
-    function displayModal() {
-        modal.style.display = "flex";
-    }
-
     btn.onclick = function () {
         modal.style.display = "flex";
     }
 
     span.onclick = function () {
+        document.getElementById("modalButton").checked = false;
         modal.style.display = "none";
     }
 

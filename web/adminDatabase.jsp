@@ -150,6 +150,9 @@
                     Quotes 2
                 </div>
                 <div class="table-header-cell">
+                    Price
+                </div>
+                <div class="table-header-cell">
                     Actions
                 </div>
             </div>
@@ -203,6 +206,9 @@
                     </div>
                     <div class="table-body-cell">
                         <%out.print(rs.getString("QUOTES2"));%>
+                    </div>
+                    <div class="table-body-cell">
+                        <%out.print(rs.getString("PRICE"));%>
                     </div>
 
                     <div class="table-body-cell">

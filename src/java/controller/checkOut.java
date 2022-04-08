@@ -59,6 +59,7 @@ public class checkOut extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         ServletContext sc = getServletContext();
         try {
+            HttpSession session = request.getSession();
             String name = request.getParameter("name");
             String date = request.getParameter("datetime");
             try {
@@ -79,6 +80,8 @@ public class checkOut extends HttpServlet {
             String url = request.getParameter("url");
             String message = request.getParameter("message");
             String message2 = request.getParameter("message2");
+            String price = request.getParameter("price");
+            System.out.println(price);
             String placeholder = "No add-ons selected.";
             List<String> addOns = new ArrayList<>();
 
@@ -125,7 +128,7 @@ public class checkOut extends HttpServlet {
             ResultSet rs = prepStmt.executeQuery();
             Random rnd = new Random();
             int rowNum = rnd.nextInt(99999);
-            if(rs.next()){ //check if there exists record
+            if (rs.next()) { //check if there exists record
                 while (rs.next()) { //loop through db
                     if (rs.getInt("USERID") == rowNum) { //if found userid same as random number, add 1 to random number
                         System.out.println("in if");
@@ -135,8 +138,8 @@ public class checkOut extends HttpServlet {
             }
             System.out.println(rowNum);
             PreparedStatement pStmt = con.prepareStatement("INSERT INTO ORDERSDB (USERID, NAME, DATEANDTIME, OCCASION, HEADCOUNT, CONTACTNUMBER,"
-                    + "PACKAGE, MENU, VENUE, ADDONS, REQUESTS, THEME, GDRIVE, QUOTES1, QUOTES2)"
-                    + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+                    + "PACKAGE, MENU, VENUE, ADDONS, REQUESTS, THEME, GDRIVE, QUOTES1, QUOTES2, PRICE)"
+                    + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
             pStmt.setInt(1, rowNum);
             pStmt.setString(2, name);
             pStmt.setTimestamp(3, new Timestamp(inputDate.getTime()));
@@ -152,6 +155,7 @@ public class checkOut extends HttpServlet {
             pStmt.setString(13, url);
             pStmt.setString(14, message);
             pStmt.setString(15, message2);
+            pStmt.setString(16, price);
 
             pStmt.executeUpdate();
             pStmt.close();

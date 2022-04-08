@@ -83,6 +83,7 @@ public class adminUpdate extends HttpServlet {
             String url = request.getParameter("url");
             String message = request.getParameter("message");
             String message2 = request.getParameter("message2");
+            String price = request.getParameter("price");
             String placeholder = "No add-ons selected.";
             List<String> addOns = new ArrayList<>();
 
@@ -116,6 +117,9 @@ public class adminUpdate extends HttpServlet {
             } else if (menu.isEmpty()) {
                 sc.setAttribute("errorMessage", "No menu selected!");
                 throw new SQLException();
+            } else if (price.isEmpty()) {
+                sc.setAttribute("errorMessage", "Price is set to 0!");
+                throw new SQLException();
             }
             System.out.println(userid);
 
@@ -127,7 +131,7 @@ public class adminUpdate extends HttpServlet {
 
             PreparedStatement pStmt = con.prepareStatement("UPDATE ORDERSDB SET NAME = ?, DATEANDTIME = ?, "
                     + "OCCASION = ?, HEADCOUNT = ?, CONTACTNUMBER = ?,"
-                    + "PACKAGE = ?, MENU = ?, VENUE = ?, ADDONS = ?, REQUESTS = ?, THEME = ?, GDRIVE = ?, QUOTES1 = ?, QUOTES2 = ?"
+                    + "PACKAGE = ?, MENU = ?, VENUE = ?, ADDONS = ?, REQUESTS = ?, THEME = ?, GDRIVE = ?, QUOTES1 = ?, QUOTES2 = ?, PRICE = ?"
                     + "WHERE USERID = ?");
             
             pStmt.setString(1, name);
@@ -144,7 +148,9 @@ public class adminUpdate extends HttpServlet {
             pStmt.setString(12, url);
             pStmt.setString(13, message);
             pStmt.setString(14, message2);
-            pStmt.setInt(15, userid);
+            pStmt.setString(15, price);
+            pStmt.setInt(16, userid);
+            
 
             pStmt.executeUpdate();
             pStmt.close();
