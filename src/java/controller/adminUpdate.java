@@ -154,7 +154,7 @@ public class adminUpdate extends HttpServlet {
 
             pStmt.executeUpdate();
             pStmt.close();
-            response.sendRedirect("Homepage.jsp");
+            response.sendRedirect("adminDatabase.jsp");
         }catch(Exception e){
             e.printStackTrace();
         }

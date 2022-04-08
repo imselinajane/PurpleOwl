@@ -32,6 +32,7 @@
         </nav>
         <form  method="POST" action="updateDB.do">
             <%
+                response.setHeader("Cache-control", "no-cache, no-store, must-revalidate");
                 try {
                     //Register driver
                     Class.forName(getServletContext().getInitParameter("jdbcClassName"));
@@ -85,7 +86,7 @@
 
                 <div class="personalDetails">
                     <label for="request">Dietary Requests/Restrictions:</label><br>
-                    <textarea rows="5" cols="60" name="requestText" placeholder="<%= rs.getString("REQUESTS")%>"></textarea>
+                    <textarea rows="5" cols="60" name="requestText" placeholder="<%= rs.getString("REQUESTS")%>"></textarea><br>
                     <label for="venue">Preferred Venue:</label><br>
                     <input type="text" placeholder="<%= rs.getString("VENUE")%>" id="venue" name="venue"required><br><br>
 
@@ -141,7 +142,7 @@
                         while (rsAddOn.next()) {
                             if (rsAddOn.getString("TYPE").equals("Add-On")) { %>
                     <input type="checkbox" id="addOnsChkbox" data-price="<%out.print(rsAddOn.getInt("PRICE"));%>" 
-                           name="addOnsChkbox" value="<%out.print(rsAddOn.getInt("PRICE"));%>">
+                           name="addOnsChkbox" value="<%out.print(rsAddOn.getString("NAME"));%>">
                     <label for="addOnsChkbox"><%out.print(rsAddOn.getString("NAME"));%></label> <br><br>
                     <% }
                         }

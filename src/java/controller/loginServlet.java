@@ -88,7 +88,8 @@ public class loginServlet extends HttpServlet {
                         ucl.contextInitialized(new ServletContextEvent(sc));
                         response.sendRedirect("adminDatabase.jsp");
                         return;
-                    } else if (userEmail.equals(rs.getString("EMAIL")) && !pass.equals(decrypt(rs.getString("PASSWORD")))) {
+                    } else if ((userEmail.equals(rs.getString("EMAIL")) || userEmail.equals(rs.getString("USERNAME")))
+                            && !pass.equals(decrypt(rs.getString("PASSWORD")))) {
                         //error 2 - correct email, wrong pass
                         sc.setAttribute("errorMessage", "Sorry, you entered the wrong password!");
                         throw new AuthenticationException(); //change this exception to user-defined exception soon, placeholder
@@ -101,10 +102,13 @@ public class loginServlet extends HttpServlet {
             }
         } catch (SQLException sqle) {
             sc.setAttribute("errorMessage", "SQL Exception occurred!");
+            sqle.printStackTrace();
             response.sendRedirect("errorPage.jsp");
         } catch (NullValueException nve) {
+            nve.printStackTrace();
             response.sendRedirect("errorPage.jsp");
         } catch (AuthenticationException aue) {
+            aue.printStackTrace();
             response.sendRedirect("errorPage.jsp");
         }
     }

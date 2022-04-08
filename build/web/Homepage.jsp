@@ -162,10 +162,11 @@
         <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@300&display=swap" rel="stylesheet">
 
         <!-- Modal -->
+        <!-- 
         <div class="modal fade" id="myModal" role="dialog">
             <div class="modal-dialog modal-dialog-centered"  >
 
-                <!-- Modal content-->
+                
                 <div class="modal-content">
                     <div class="modal-header">
                         <h5 class="modal-title" id="staticBackdropLabel">WELCOME</h5>
@@ -191,11 +192,11 @@
             </div>
         </div>
 
-        <!-- Second Modal -->
+        
         <div class="modal fade" id="secondModal" role="dialog" data-backdrop="static">
             <div class="modal-dialog modal-dialog-centered">
 
-                <!-- Modal content-->
+                
                 <div class="modal-content">
                     <div class="modal-header alert alert-success">
                         <h5 class="modal-title" id="staticBackdropLabel">Thank you!</h5>
@@ -209,7 +210,7 @@
                 </div>
             </div>
         </div>
-
+-->
     </body>
 
 </html>

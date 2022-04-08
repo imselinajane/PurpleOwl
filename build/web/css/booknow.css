@@ -167,7 +167,7 @@ input[type='checkbox']:checked {
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    width: 216px;
+    width: 90%;
     margin: .6rem;
 }
 

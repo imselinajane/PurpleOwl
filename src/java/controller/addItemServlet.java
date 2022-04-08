@@ -209,10 +209,13 @@ public class addItemServlet extends HttpServlet {
             }
         } catch (SQLException sqle) {
             sc.setAttribute("errorMessage", "SQL Exception occurred!");
+            sqle.printStackTrace();
             response.sendRedirect("errorPage.jsp");
         } catch (AuthenticationException aue) {
+            aue.printStackTrace();
             response.sendRedirect("errorPage.jsp");
         } catch (NullValueException nve) {
+            nve.printStackTrace();
             response.sendRedirect("errorPage.jsp");
         }
     }

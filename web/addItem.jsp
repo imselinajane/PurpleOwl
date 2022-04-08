@@ -42,6 +42,7 @@
                 <button class ="add">Add Package</button>
             </div>
         </form>
+        <button onclick="location.href = 'foodPackages.jsp'" class="homePageBT">Back to Food Packages</button>
         <% } else if (type.equals("Add Menu")) {%>
         <form action="add.do" method="POST">
             <div class="addMenu">
@@ -60,7 +61,7 @@
                 <button class ="add">Add Menu</button>
             </div>
         </form>
-
+        <button onclick="location.href = 'foodPackages.jsp'" class="homePageBT">Back to Food Packages</button>
         <% } else if (type.equals("Add Add-On")) {%>
         <form action="add.do" method="POST">
             <div class="addAddOn">
@@ -76,6 +77,7 @@
                 <button class ="add">Add Add-On</button>
             </div>
         </form>
+        <button onclick="location.href = 'foodPackages.jsp'" class="homePageBT">Back to Food Packages</button>
         <% } %>
     </body>
 </html>

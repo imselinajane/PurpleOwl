@@ -55,6 +55,7 @@
         <h1>Create Your Special Occasion With Us!</h1>
     </div>
     <center>
+        <% response.setHeader("Cache-control", "no-cache, no-store, must-revalidate"); %>
         <form action="checkOut.do" method="POST">
             <!---midbox--->
             <div class="form-container">
@@ -174,7 +175,7 @@
                                         if (rsAddOn.getString("TYPE").equals("Add-On")) { %>
                                 <input type="checkbox" id="addOnsChkbox" data-price="<%out.print(rsAddOn.getInt("PRICE"));%>" 
                                        name="addOnsChkbox" value="<%out.print(rsAddOn.getString("NAME"));%>">
-                                <label for="addOnsChkbox"><%out.print(rsAddOn.getString("NAME"));%></label> <br><br>
+                                <label for="addOnsChkbox"><%out.print(rsAddOn.getString("NAME"));%></label>
                                 <% }
                                     } %>
                             </div>
@@ -232,7 +233,7 @@
                     </div>
                 </div>
             </div>
-                <% int i = 0; %>
+            <% int i = 0; %>
             <br><br><h1>Price: Php <span id="item-price">0.00</span></h1><br><br> <!-- change this css -->
             <input type="hidden" id="totalPrice" name="price" value="0">
 
@@ -242,22 +243,26 @@
                 <div class="modal-content">
                     <span class="close">&times;</span>
                     <div class="termsHeader">Terms and Conditions</div>
-                    <textarea class="termsContainer" readonly>Welcome to Website Name!
+                    <textarea class="termsContainer" readonly>Welcome to Purple Owl!
+01. INDOOR AND OUTDOOR LOCATION:
+FIRSTLY, ON THE OCCASION OF RAIN, IF THE SKY IS NOT CLEAR, OR THE FORECAST FOR THE DAY STATES A HIGH PROBABILITY OF RAIN, IT IS OUR PREROGATIVE TO PLACE YOU INDOORS.
+SECONDLY, OUTDOOR SPOTS WILL AUTOMATICALLY BE PRIORITISED TO FIRST RESERVERS AND/OR CLIENTS THAT AVAILED PACKAGE C OR GROUP GATHERINGS THAT AVAILED FOR LIVE BAND SETUP.
 
-These terms and conditions outline the rules and regulations for the use of Company Name's Website, located at Website.com.
+02. RESERVATION DETAILS
+ALL DETAILS SHOULD BE COLLATED ONLY WITH THE OFFICIAL COORDINATOR.IDEALLY IN ONE THREAD ONLY.
 
-By accessing this website we assume you accept these terms and conditions. Do not continue to use Website Name if you do not agree to take all of the terms and conditions stated on this page.
+03. ACCOMODATION
+WE DO NOT HAVE OVERNIGHT ACCOMMODATION AS OF THE MOMENT.
 
-The following terminology applies to these Terms and Conditions, Privacy Statement and Disclaimer Notice and all Agreements: "Client", "You" and "Your" refers to you, the person log on this website and compliant to the Company's terms and conditions. "The Company", "Ourselves", "We", "Our" and "Us", refers to our Company. "Party", "Parties", or "Us", refers to both the Client and ourselves. All terms refer to the offer, acceptance and consideration of payment necessary to undertake the process of our assistance to the Client in the most appropriate manner for the express purpose of meeting the Client's needs in respect of provision of the Company's stated services, in accordance with and subject to, prevailing law of Netherlands. Any use of the above terminology or other words in the singular, plural, capitalization and/or he/she or they, are taken as interchangeable and therefore as referring to same.
+04. REFUND, REBOOKING, TRANSFER
+WE HAVE A NO REFUND POLICY, BUT ONE MAY DEFER OR POSTPONE OR TRANSFER EVENTS TO BE AVAILED BY SOMEONE ELSE. FOR RESCHEDULING, NOTIFY US WHAT DATE AND WE WILL RELAY TO YOU ITS AVAILABILITY.
 
-Cookies
-We employ the use of cookies. By accessing Website Name, you agreed to use cookies in agreement with the Company Name's Privacy Policy.
+05. AVAILABILITY OF VENUE
+THE AVAILABILITY OF VENUE IS SUBJECT TO CHANGE AT ANY GIVEN NOTICE DUE TO THE FIRST-PAY FIRST-SERVED BASIS POLICY OF OUR EVENT.
 
-Most interactive websites use cookies to let us retrieve the user's details for each visit. Cookies are used by our website to enable the functionality of certain areas to make it easier for people visiting our website. Some of our affiliate/advertising partners may also use cookies.
-
-License
-Unless otherwise stated, Company Name and/or its licensors own the intellectual property rights for all material on Website Name. All intellectual property rights are reserved. You may access this from Website Name for your own personal use subjected to restrictions set in these terms and conditions.</textarea>
-
+06. AGREEMENT
+FINALIZATION OF EVENT ONCE PAYMENT IS MADE IS AN ACKNOWLEDGMENT AND AGREEMENT TO ALL THE AFOREMENTIONED WRITTEN RULES AND POLICIES.
+                    </textarea>
                     <div class="rowDiv">
                         <button type="button" class="decline" id="decline">Decline</button>
                         <button class="accept" id="accept">Accept</button>
